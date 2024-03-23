@@ -10,7 +10,6 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     // Initialize component
-    
     console.log("TaskComponent initialized");
   }
 }
