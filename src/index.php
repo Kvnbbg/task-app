@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Task App</title>
-    <link rel="stylesheet" href="path/to/your/styles.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <nav>
@@ -16,6 +16,26 @@
             <li>Task 3</li>
         </ul>
     </nav>
+    <h1>Welcome to My Task App</h1>
+    
+    <div id="task-list">
+        <h2>Tasks</h2>
+        <ul id="tasks">
+            <li>Task 1</li>
+            <li>Task 2</li>
+            <li>Task 3</li>
+        </ul>
+        <script>
+            // Get the tasks element
+            const tasksElement = document.getElementById('tasks');
+
+            // Create a new task element
+            const newTaskElement = document.createElement('li');
+            newTaskElement.textContent = 'Task 4';
+
+            // Append the new task element to the tasks list
+            tasksElement.appendChild(newTaskElement);
+        </script>
     <img src="path/to/your/image.jpg" alt="Image">
     <h1>To-Do List</h1>
     <form action="process_form.php" method="POST">
