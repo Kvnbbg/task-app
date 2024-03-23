@@ -1,5 +1,16 @@
 <?php
+require 'db.php'; // Ensure this path is correct
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['task'])) {
+    $task = $_POST['task'];
+
+    $sql = "INSERT INTO tasks (name) VALUES (?)";
+    $stmt= $pdo->prepare($sql);
+    $stmt->execute([$task]);
+
+    header("Location: index.php"); // Redirect back to the main page
+    exit();
+}
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve form data
