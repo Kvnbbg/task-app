@@ -1,5 +1,8 @@
 /* task.component.css */
 
+/* Import statements that reference styles from other files */
+@import '../../styles.css';
+
 /* Add your CSS styles here */
 body {
     background-color: #f2f2f2;
