@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile  # This is correct only if your Dockerfile is named "Dockerfile" and located in the "./backend" directory
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend:/app
+    environment:
+      - APP_ENV=development
+    depends_on:
+      - db
