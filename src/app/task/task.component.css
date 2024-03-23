@@ -1,0 +1,36 @@
+/* task.component.css */
+
+/* Add your CSS styles here */
+body {
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.task {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.task-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.task-description {
+    font-size: 14px;
+    color: #666;
+}
+
+.task-completed {
+    text-decoration: line-through;
+    color: #999;
+}
