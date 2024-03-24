@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ["./task.component.css"],
 })
 export class AppComponent {
+[x: string]: any;
   title = 'Error Handling App';
   errorMessage: string = '';
 

@@ -4,7 +4,7 @@ services:
   backend:
     build: 
       context: ./backend
-      dockerfile: Dockerfile  # This is correct only if your Dockerfile is named "Dockerfile" and located in the "./backend" directory
+      dockerfile: Dockerfile
     ports:
       - "8080:80"
     volumes:
@@ -13,3 +13,33 @@ services:
       - APP_ENV=development
     depends_on:
       - db
+
+  db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: taskapp
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile  # Ensure you have a Dockerfile set up for your Angular project in the "./frontend" directory.
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "4200:4200"
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Helps with live-reloading issues in some environments
+    depends_on:
+      - backend
+
+volumes:
+  db_data: # Persists MySQL data across container rebuilds
