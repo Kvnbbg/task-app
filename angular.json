@@ -40,20 +40,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "my-app:build"
+            "browserTarget": "task-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "my-app:build:production"
+              "browserTarget": "task-app:build:production"
             }
           }
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "my-app:build"
-          }
-        },
+
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -92,18 +87,14 @@
             "outputPath": "dist/error-handling-app",
             "index": "error-handling-app/src/index.html",
             "browser": "error-handling-app/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "error-handling-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "error-handling-app/src/favicon.ico",
               "error-handling-app/src/assets"
             ],
-            "styles": [
-              "error-handling-app/src/styles.scss"
-            ],
+            "styles": ["error-handling-app/src/styles.scss"],
             "scripts": [],
             "server": "error-handling-app/src/main.server.ts",
             "prerender": true,
@@ -156,26 +147,21 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "error-handling-app/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "error-handling-app/src/favicon.ico",
               "error-handling-app/src/assets"
             ],
-            "styles": [
-              "error-handling-app/src/styles.scss"
-            ],
+            "styles": ["error-handling-app/src/styles.scss"],
             "scripts": []
           }
         }
       }
     }
   },
-  "defaultProject": "my-app",
+  "defaultProject": "task-app",
   "cli": {
     "analytics": "9a164ff3-b432-480e-8a27-201a9b4ae9c0"
   }
