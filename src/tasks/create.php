@@ -1,60 +1,52 @@
 <?php
-require 'db.php'; // Ensure this path is correct
+require 'db.php'; // Use the existing database connection
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['task'])) {
-    $task = $_POST['task'];
+$taskName = $taskDescription = "";
+$feedback = "";
 
-    $sql = "INSERT INTO tasks (name) VALUES (?)";
-    $stmt= $pdo->prepare($sql);
-    $stmt->execute([$task]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $taskName = trim($_POST['task_name']);
+    $taskDescription = trim($_POST['task_description']);
 
-    header("Location: index.php"); // Redirect back to the main page
-    exit();
-}
-// Check if the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data
-    $taskName = $_POST['task_name'];
-    $taskDescription = $_POST['task_description'];
+    // Basic validation
+    if (empty($taskName) || empty($taskDescription)) {
+        $feedback = "Please fill in all fields.";
+    } elseif (strlen($taskName) > 255) {
+        $feedback = "Task name is too long. Maximum length is 255 characters.";
+    } else {
+        try {
+            // Prepare SQL and bind parameters
+            $stmt = $pdo->prepare("INSERT INTO tasks (name, description) VALUES (:name, :description)");
+            $stmt->bindParam(':name', $taskName);
+            $stmt->bindParam(':description', $taskDescription);
 
-    // TODO: Add code to save the task to the database or perform any other necessary actions
-    // Example code to save the task to the database using PDO
-    $servername = "localhost";
-    $username = "your_username";
-    $password = "your_password";
-    $dbname = "your_database";
-
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $stmt = $conn->prepare("INSERT INTO tasks (name, description) VALUES (:name, :description)");
-        $stmt->bindParam(':name', $taskName);
-        $stmt->bindParam(':description', $taskDescription);
-        $stmt->execute();
-
-        echo "Task saved successfully!";
-    } catch(PDOException $e) {
-        echo "Error: " . $e->getMessage();
+            $stmt->execute();
+            $feedback = "Task saved successfully!";
+            // Clear form fields after successful submission
+            $taskName = $taskDescription = "";
+        } catch(PDOException $e) {
+            $feedback = "Error: " . $e->getMessage();
+        }
     }
-
-    $conn = null;
 }
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Create Task</title>
+    <!-- Consider including Bootstrap or your CSS for styling -->
 </head>
 <body>
     <h1>Create Task</h1>
+    <?php if (!empty($feedback)): ?>
+        <p><?php echo $feedback; ?></p>
+    <?php endif; ?>
     <form method="POST" action="">
         <label for="task_name">Task Name:</label>
-        <input type="text" name="task_name" id="task_name" required><br><br>
+        <input type="text" name="task_name" id="task_name" value="<?php echo htmlspecialchars($taskName); ?>" required><br><br>
         <label for="task_description">Task Description:</label>
-        <textarea name="task_description" id="task_description" required></textarea><br><br>
+        <textarea name="task_description" id="task_description" required><?php echo htmlspecialchars($taskDescription); ?></textarea><br><br>
         <input type="submit" value="Create Task">
     </form>
 </body>
