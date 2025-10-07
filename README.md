@@ -1,6 +1,6 @@
 # task-app
-A simple task management app
-
+Simple task management app in PHP enhanced with home blood pressure (BP) tracking. Integrates features from Harvard Health: https://www.health.harvard.edu/heart-health/track-your-blood-pressure-at-home-the-right-way. Deployed on railway task-app-production-099b.up.railway.app (his  [documentation
+](https://railpack.com/))
 ## Features
 - Create tasks
 - Update tasks
