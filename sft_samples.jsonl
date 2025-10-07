@@ -1,0 +1,2 @@
+{"instruction": "User: 'deploy to Railway'", "phase": "deploy", "lang": "php", "success": true, "output": "1. Add Procfile... ✅ Validation: App live."}
+{"instruction": "User: 'build failed'", "phase": "build", "lang": "php", "success": false, "output": "❌ Error: Syntax. Run: php -l index.php ⚠️ Fix: Edit code."}
