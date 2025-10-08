@@ -1,16 +1,20 @@
 version: '3.8'
 
 services:
-  backend:
-    build: 
-      context: ./backend
+  app:
+    build:
+      context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "8000:8000"
     volumes:
-      - ./backend:/app
+      - .:/app
     environment:
-      - APP_ENV=development
+      - DB_HOST=db
+      - DB_NAME=taskapp
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - PORT=8000
     depends_on:
       - db
 
@@ -27,19 +31,5 @@ services:
     ports:
       - "3306:3306"
 
-  frontend:
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile  # Ensure you have a Dockerfile set up for your Angular project in the "./frontend" directory.
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    ports:
-      - "4200:4200"
-    environment:
-      - CHOKIDAR_USEPOLLING=true # Helps with live-reloading issues in some environments
-    depends_on:
-      - backend
-
 volumes:
-  db_data: # Persists MySQL data across container rebuilds
+  db_data:
