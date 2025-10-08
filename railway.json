@@ -1,0 +1,28 @@
+{
+  "tables": {
+    "tasks": {
+      "columns": {
+        "id": "INT AUTO_INCREMENT PRIMARY KEY",
+        "text": "VARCHAR(255) NOT NULL",
+        "completed": "BOOLEAN NOT NULL DEFAULT false"
+      }
+    },
+    "readings": {
+      "columns": {
+        "id": "INT AUTO_INCREMENT PRIMARY KEY",
+        "systolic": "INT NOT NULL",
+        "diastolic": "INT NOT NULL",
+        "pulse": "INT",
+        "note": "TEXT",
+        "ts": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+      }
+    },
+    "sessions": {
+      "columns": {
+        "session_id": "VARCHAR(128) NOT NULL PRIMARY KEY",
+        "data": "TEXT NOT NULL",
+        "last_updated": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+      }
+    }
+  }
+}
